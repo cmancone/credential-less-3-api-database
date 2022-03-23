@@ -26,6 +26,11 @@ variable "database_subnet_ids" {
   description = "List of subnet ids to make the database accessible in"
 }
 
+variable "database_bastion_subnet_id" {
+  type        = string
+  description = "The id of the (public) subnet to put the bastion in"
+}
+
 variable "database_availability_zones" {
   type        = list(string)
   description = "List of availability zones that the database should live in"

@@ -26,10 +26,8 @@ resource "aws_security_group_rule" "allow_incoming_bastion" {
 }
 
 resource "aws_security_group" "bastion" {
-  name        = "${local.name}-bastion"
+  name        = local.bastion_name
   description = "Security group for the bastion host for ${local.name}"
   vpc_id      = var.vpc_id
-  tags = merge(local.tags, {
-    Name = "${local.name}-bastion"
-  })
+  tags        = local.bastion_tags
 }

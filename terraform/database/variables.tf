@@ -26,6 +26,11 @@ variable "subnet_ids" {
   description = "List of subnet ids to make the database accessible in"
 }
 
+variable "bastion_subnet_id" {
+  type        = string
+  description = "The id of the subnet to put the bastion in"
+}
+
 variable "availability_zones" {
   type        = list(string)
   description = "List of availability zones that the database should live in"
@@ -49,4 +54,12 @@ variable "tags" {
   type        = map(string)
   description = "Tags to attach to all resources"
   default     = {}
+}
+
+########
+# Misc #
+########
+variable "akeyless_ca_public_key" {
+  type        = string
+  description = "The public key of the AKeyless CA that will be used for cert-based authentication to SSH into the bastion"
 }
