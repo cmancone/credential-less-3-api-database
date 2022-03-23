@@ -1,11 +1,3 @@
-data "template_file" "bastion_init" {
-  template = file("${path.module}/bastion_init.sh")
-
-  vars = {
-    akeyless_ca_public_key = var.akeyless_ca_public_key
-  }
-}
-
 resource "aws_instance" "bastion" {
   ami                         = data.aws_ami.ubuntu_for_bastion_host.id
   instance_type               = "t2.micro"
@@ -25,6 +17,14 @@ resource "aws_instance" "bastion" {
   }
 
   tags = local.bastion_tags
+}
+
+data "template_file" "bastion_init" {
+  template = file("${path.module}/bastion_init.sh")
+
+  vars = {
+    akeyless_ca_public_key = var.akeyless_ca_public_key
+  }
 }
 
 data "aws_ami" "ubuntu_for_bastion_host" {
@@ -54,7 +54,8 @@ resource "aws_iam_role" "bastion" {
     ]
 }
 EOF
-  tags               = local.bastion_tags
+
+  tags = local.bastion_tags
 
 }
 

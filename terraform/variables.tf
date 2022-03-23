@@ -13,6 +13,11 @@ variable "name" {
   }
 }
 
+variable "region" {
+  type        = string
+  description = "The name of the region that the infrastructure lives in"
+}
+
 variable "vpc_id" {
   type        = string
   description = "The id of the VPC to use for all infrastructure"
@@ -46,6 +51,11 @@ variable "database_incoming_security_group_ids" {
   type        = list(string)
   default     = []
   description = "List of security group ids that should be able to access the database"
+}
+
+variable "database_path_to_provider" {
+  type        = string
+  description = "The desired path for the database provider"
 }
 
 ########

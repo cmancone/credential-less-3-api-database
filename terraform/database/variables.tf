@@ -13,6 +13,11 @@ variable "name" {
   }
 }
 
+variable "region" {
+  type        = string
+  description = "The name of the region that the infrastructure lives in"
+}
+
 ##############
 # Networking #
 ##############
@@ -54,6 +59,34 @@ variable "tags" {
   type        = map(string)
   description = "Tags to attach to all resources"
   default     = {}
+}
+
+############
+# AKeyless #
+############
+variable "path_to_provider" {
+  type        = string
+  description = "The desired path for the database provider"
+}
+
+####################
+# Migration Lambda #
+####################
+variable "zip_filename" {
+  type        = string
+  description = "Filename for the zip file containing the build of the database migrator"
+}
+
+variable "migration_handler" {
+  type        = string
+  description = "Handler for the lambda migrator"
+  default     = "migration.lambda_handler"
+}
+
+variable "migration_runtime" {
+  type        = string
+  description = "Runtime for the lambda migrator"
+  default     = "python3.8"
 }
 
 ########
