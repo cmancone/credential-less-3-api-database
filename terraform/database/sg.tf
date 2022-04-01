@@ -31,3 +31,12 @@ resource "aws_security_group" "bastion" {
   vpc_id      = var.vpc_id
   tags        = local.bastion_tags
 }
+
+resource "aws_security_group_rule" "allow_outgoing_bastion" {
+  security_group_id = aws_security_group.bastion.id
+  type              = "egress"
+  from_port         = "1"
+  to_port           = "65535"
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+}

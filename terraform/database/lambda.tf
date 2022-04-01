@@ -2,7 +2,7 @@ resource "aws_lambda_function" "cron" {
   filename         = var.zip_filename
   source_code_hash = filebase64sha256(var.zip_filename)
   function_name    = local.migration_lambda_name
-  role             = aws_iam_role.main.arn
+  role             = aws_iam_role.migration_lambda.arn
   handler          = var.migration_handler
   runtime          = var.migration_runtime
   timeout          = 300
@@ -15,7 +15,10 @@ resource "aws_lambda_function" "cron" {
 
   environment {
     variables = {
-      akeyless_database_provider = var.path_to_provider
+      akeyless_mysql_dynamic_producer = "${var.akeyless_folder}/migration"
+      akeyless_api_host               = var.akeyless_api_host
+      db_database                     = aws_rds_cluster.database.database_name
+      db_host                         = aws_rds_cluster.database.endpoint
     }
   }
 }
@@ -29,7 +32,7 @@ resource "aws_iam_role" "migration_lambda" {
         {
             "Action": "sts:AssumeRole",
             "Principal": {
-               "Service": "ec2.amazonaws.com"
+               "Service": "lambda.amazonaws.com"
             },
             "Effect": "Allow",
             "Sid": ""

@@ -46,6 +46,21 @@ variable "incoming_security_group_ids" {
   description = "List of security group ids that should be able to access the database"
 }
 
+####################
+# Database workers #
+####################
+variable "instance_class" {
+  type        = string
+  description = "The instance type to use for the database workers"
+  default     = "db.t3.small"
+}
+
+variable "instance_count" {
+  type        = number
+  description = "The number of database workers to launch"
+  default     = 1
+}
+
 ##################
 # Database Specs #
 ##################
@@ -64,9 +79,14 @@ variable "tags" {
 ############
 # AKeyless #
 ############
-variable "path_to_provider" {
+variable "akeyless_api_host" {
   type        = string
-  description = "The desired path for the database provider"
+  description = "The URL to the gateway where the service will login and fetch credentials from"
+}
+
+variable "akeyless_folder" {
+  type        = string
+  description = "The desired path to the folder where all database targets/producers will be kept"
 }
 
 ####################
@@ -80,7 +100,7 @@ variable "zip_filename" {
 variable "migration_handler" {
   type        = string
   description = "Handler for the lambda migrator"
-  default     = "migration.lambda_handler"
+  default     = "migrate_database.lambda_handler"
 }
 
 variable "migration_runtime" {

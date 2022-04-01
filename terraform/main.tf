@@ -1,12 +1,42 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+    akeyless = {
+      version = ">= 1.0.0"
+      source  = "akeyless-community/akeyless"
+    }
+  }
+  backend "s3" {
+    bucket = "always-upgrade-terraform-state"
+    key    = "products-service.json"
+    region = "us-east-1"
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+provider "akeyless" {
+  api_gateway_address = "https://api.akeyless.io"
+}
+
 module "database" {
   source = "./database"
 
   name                        = var.name
   region                      = var.region
   vpc_id                      = var.vpc_id
+  availability_zones          = var.database_availability_zones
   subnet_ids                  = var.database_subnet_ids
+  zip_filename                = var.zip_filename
   bastion_subnet_id           = var.database_bastion_subnet_id
   engine_version              = var.database_engine_version
   incoming_security_group_ids = var.database_incoming_security_group_ids
-  database_path_to_provider   = var.database_database_path_to_provider
+  akeyless_ca_public_key      = var.akeyless_ca_public_key
+  akeyless_api_host           = var.akeyless_api_host
+  akeyless_folder             = var.akeyless_folder
 }
