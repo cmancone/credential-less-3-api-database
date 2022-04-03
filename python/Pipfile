@@ -4,9 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-clear-skies = "*"
-clear-skies-aws = "*"
-mygrations = "*"
+pymysql = "*"
+requests = "*"
+akeyless = {git = "https://github.com/akeylesslabs/akeyless-python.git"}
+akeyless-cloud-id = "*"
 
 [dev-packages]
 

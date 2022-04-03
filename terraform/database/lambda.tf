@@ -1,4 +1,4 @@
-resource "aws_lambda_function" "cron" {
+resource "aws_lambda_function" "migration" {
   filename         = var.zip_filename
   source_code_hash = filebase64sha256(var.zip_filename)
   function_name    = local.migration_lambda_name
@@ -10,13 +10,14 @@ resource "aws_lambda_function" "cron" {
 
   vpc_config {
     subnet_ids         = var.subnet_ids
-    security_group_ids = [aws_security_group.bastion.id]
+    security_group_ids = [aws_security_group.lambda.id]
   }
 
   environment {
     variables = {
+      akeyless_access_id              = var.akeyless_access_id
       akeyless_mysql_dynamic_producer = "${var.akeyless_folder}/migration"
-      akeyless_api_host               = var.akeyless_api_host
+      akeyless_api_host               = "https://api.akeyless.io"
       db_database                     = aws_rds_cluster.database.database_name
       db_host                         = aws_rds_cluster.database.endpoint
     }

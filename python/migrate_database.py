@@ -32,7 +32,7 @@ def lambda_handler(event, context):
             clearskies.secrets.akeyless_aws_iam_auth(),
         ]
     )
-    migrate(event, context)
+    return migrate(event, context)
 
 # and this is the entry point for our developers.  We would call it with something like this:
 # python3 migrate_database --environment production --command plan
@@ -62,4 +62,4 @@ if __name__ == '__main__':
             clearskies.secrets.akeyless_saml_auth(),
         ]
     )
-    migrate(event, context)
+    migrate()

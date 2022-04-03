@@ -79,6 +79,11 @@ variable "tags" {
 ############
 # AKeyless #
 ############
+variable "akeyless_access_id" {
+  type        = string
+  description = "The access id for the lambdas to use when logging into AWS"
+}
+
 variable "akeyless_api_host" {
   type        = string
   description = "The URL to the gateway where the service will login and fetch credentials from"

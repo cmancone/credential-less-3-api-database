@@ -22,6 +22,11 @@ provider "aws" {
 
 provider "akeyless" {
   api_gateway_address = "https://api.akeyless.io"
+
+  api_key_login {
+    access_id  = "p-een80gwlzam6"
+    access_key = "DCHFoz/XYgvtLCm9QUESdm4TvbRSB3CmagdFsVeBuZE="
+  }
 }
 
 module "database" {
@@ -36,6 +41,7 @@ module "database" {
   bastion_subnet_id           = var.database_bastion_subnet_id
   engine_version              = var.database_engine_version
   incoming_security_group_ids = var.database_incoming_security_group_ids
+  akeyless_access_id          = var.akeyless_access_id
   akeyless_ca_public_key      = var.akeyless_ca_public_key
   akeyless_api_host           = var.akeyless_api_host
   akeyless_folder             = var.akeyless_folder

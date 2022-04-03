@@ -64,6 +64,11 @@ variable "database_incoming_security_group_ids" {
 #############
 # AKeyless ##
 #############
+variable "akeyless_access_id" {
+  type        = string
+  description = "The access id for the lambdas to use when logging into AWS"
+}
+
 variable "akeyless_folder" {
   type        = string
   description = "The desired path to the folder where all database targets/producers will be kept"
