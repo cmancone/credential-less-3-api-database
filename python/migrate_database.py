@@ -59,7 +59,7 @@ if __name__ == '__main__':
         migration_app,
         additional_configs=[
             clearskies.secrets.additional_configs.mysql_connection_dynamic_producer_via_ssh_cert_bastion(),
-            clearskies.secrets.akeyless_saml_auth(),
+            clearskies.secrets.akeyless_access_key_auth(),
         ]
     )
     migrate()

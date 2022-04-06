@@ -21,22 +21,36 @@ provider "aws" {
 }
 
 provider "akeyless" {
+  alias               = "global-cloud"
   api_gateway_address = "https://api.akeyless.io"
 
-  api_key_login {
-    access_id  = "p-een80gwlzam6"
-    access_key = "DCHFoz/XYgvtLCm9QUESdm4TvbRSB3CmagdFsVeBuZE="
+  aws_iam_login {
+    access_id = "p-x93k1uragthy"
+  }
+}
+
+provider "akeyless" {
+  alias               = "gateway"
+  api_gateway_address = "https://us.gateway.akeyless.always-upgrade.us"
+
+  aws_iam_login {
+    access_id = "p-x93k1uragthy"
   }
 }
 
 module "database" {
   source = "./database"
+  providers = {
+    akeyless-global-cloud = akeyless.global-cloud
+    akeyless-gateway      = akeyless.gateway
+  }
 
   name                        = var.name
   region                      = var.region
   vpc_id                      = var.vpc_id
   availability_zones          = var.database_availability_zones
   subnet_ids                  = var.database_subnet_ids
+  database_security_group_id  = aws_security_group.database.id
   zip_filename                = var.zip_filename
   bastion_subnet_id           = var.database_bastion_subnet_id
   engine_version              = var.database_engine_version
@@ -45,4 +59,23 @@ module "database" {
   akeyless_ca_public_key      = var.akeyless_ca_public_key
   akeyless_api_host           = var.akeyless_api_host
   akeyless_folder             = var.akeyless_folder
+}
+
+module "application" {
+  source = "./application"
+
+  name                            = var.name
+  region                          = var.region
+  vpc_id                          = var.vpc_id
+  subnet_ids                      = var.database_subnet_ids
+  database_security_group_id      = aws_security_group.database.id
+  zip_filename                    = var.zip_filename
+  akeyless_access_id              = var.akeyless_access_id
+  akeyless_api_host               = var.akeyless_api_host
+  akeyless_database_producer_path = "${var.akeyless_folder}/application"
+  database_name                   = module.database.database_name
+  database_host                   = module.database.database_host
+  lb_subnet_ids                   = var.application_lb_subnet_ids
+  route_53_hosted_zone_name       = var.application_route_53_hosted_zone_name
+  domain_name                     = var.application_domain_name
 }

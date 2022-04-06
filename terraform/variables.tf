@@ -29,6 +29,7 @@ variable "vpc_id" {
 variable "zip_filename" {
   type        = string
   description = "The zip file with all the python code for the service"
+  default     = "python.zip"
 }
 
 ############
@@ -82,6 +83,25 @@ variable "akeyless_ca_public_key" {
 variable "akeyless_api_host" {
   type        = string
   description = "The URL to the gateway where the service will login and fetch credentials from"
+  default     = "https://api.akeyless.io"
+}
+
+###############
+# Application #
+###############
+variable "application_lb_subnet_ids" {
+  type        = list(string)
+  description = "The IDs of the subnets to put the load balancer in (typically public subnets)"
+}
+
+variable "application_route_53_hosted_zone_name" {
+  type        = string
+  description = "The Route53 hosted zone where that will hold the load balancer domain name"
+}
+
+variable "application_domain_name" {
+  type        = string
+  description = "The domain name for the application load balancer"
 }
 
 ########

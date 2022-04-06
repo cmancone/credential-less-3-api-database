@@ -28,36 +28,12 @@ variable "vpc_id" {
 
 variable "subnet_ids" {
   type        = list(string)
-  description = "List of subnet ids to make the database accessible in"
-}
-
-variable "bastion_subnet_id" {
-  type        = string
-  description = "The id of the subnet to put the bastion in"
-}
-
-variable "availability_zones" {
-  type        = list(string)
-  description = "List of availability zones that the database should live in"
-}
-
-variable "incoming_security_group_ids" {
-  type        = list(string)
-  description = "List of security group ids that should be able to access the database"
+  description = "List of subnet ids to deploy the lambda to"
 }
 
 variable "database_security_group_id" {
   type        = string
   description = "The security group id for the database"
-}
-
-############
-# Database #
-############
-variable "engine_version" {
-  type        = string
-  default     = "5.7.mysql_aurora.2.07.3"
-  description = "The Aurora engine to use"
 }
 
 ############
@@ -73,42 +49,77 @@ variable "akeyless_api_host" {
   description = "The URL to the gateway where the service will login and fetch credentials from"
 }
 
-variable "akeyless_folder" {
+variable "akeyless_database_producer_path" {
   type        = string
-  description = "The desired path to the folder where all database targets/producers will be kept"
+  description = "The path to the MySQL database producer that the application will use to fetch credentials"
 }
 
-####################
-# Migration Lambda #
-####################
+######################
+# Application Lambda #
+######################
+variable "database_host" {
+  type        = string
+  description = "The URL to the database cluster to connect to"
+}
+
+variable "database_name" {
+  type        = string
+  description = "The name of the database to use (in the database cluster)"
+}
+
 variable "zip_filename" {
   type        = string
   description = "Filename for the zip file containing the build of the database migrator"
   default     = "python.zip"
 }
 
-variable "migration_handler" {
+variable "application_handler" {
   type        = string
   description = "Handler for the lambda migrator"
-  default     = "migrate_database.lambda_handler"
+  default     = "api.lambda_handler"
 }
 
-variable "migration_runtime" {
+variable "application_runtime" {
   type        = string
   description = "Runtime for the lambda migrator"
   default     = "python3.8"
 }
 
+#################
+# Load Balancer #
+#################
+variable "lb_subnet_ids" {
+  type        = list(string)
+  description = "The IDs of the subnets to put the load balancer in (typically public subnets)"
+}
+
+variable "route_53_hosted_zone_name" {
+  type        = string
+  description = "The Route53 hosted zone where that will hold the load balancer domain name"
+}
+
+variable "domain_name" {
+  type        = string
+  description = "The domain name for the application load balancer"
+}
+
+variable "alb_access_logs_bucket_name" {
+  type        = string
+  description = "The name of the bucket to send load balancer logs to"
+  default     = null
+}
+
+variable "ssl_policy" {
+  type        = string
+  description = "The AWS SSL policy to use"
+  default     = "ELBSecurityPolicy-TLS-1-2-2017-01"
+}
+
 ########
 # Misc #
 ########
-variable "akeyless_ca_public_key" {
-  type        = string
-  description = "The public key of the AKeyless CA that will be used for cert-based authentication to SSH into the bastion"
-}
-
 variable "tags" {
   type        = map(string)
-  description = "Tags to attach to all resources"
   default     = {}
+  description = "Tags to attach to all resources"
 }

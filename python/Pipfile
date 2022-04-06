@@ -8,6 +8,7 @@ pymysql = "*"
 requests = "*"
 akeyless = {git = "https://github.com/akeylesslabs/akeyless-python.git"}
 akeyless-cloud-id = "*"
+dateparser = "*"
 
 [dev-packages]
 

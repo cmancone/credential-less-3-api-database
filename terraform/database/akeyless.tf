@@ -1,6 +1,10 @@
 terraform {
   required_providers {
-    akeyless = {
+    akeyless-global-cloud = {
+      version = ">= 1.0.0"
+      source  = "akeyless-community/akeyless"
+    }
+    akeyless-gateway = {
       version = ">= 1.0.0"
       source  = "akeyless-community/akeyless"
     }
@@ -8,6 +12,7 @@ terraform {
 }
 
 resource "akeyless_target_db" "root" {
+  provider  = akeyless-global-cloud
   db_type   = "mysql"
   name      = "${var.akeyless_folder}/root"
   db_name   = aws_rds_cluster.database.database_name
@@ -22,10 +27,11 @@ resource "akeyless_target_db" "root" {
     ignore_changes = [pwd]
   }
 
-  depends_on = [aws_rds_cluster_instance.database]
+  depends_on = [aws_rds_cluster.database]
 }
 
 #resource "akeyless_producer_mysql" "application" {
+#  provider = akeyless-gateway
 #  name = "${var.akeyless_folder}/application"
 #  mysql_host = aws_rds_cluster.database.endpoint
 #  mysql_dbname = aws_rds_cluster.database.database_name
@@ -35,6 +41,7 @@ resource "akeyless_target_db" "root" {
 #}
 
 #resource "akeyless_producer_mysql" "migration" {
+#  provider = akeyless-gateway
 #  name = "${var.akeyless_folder}/migration"
 #  mysql_host = aws_rds_cluster.database.endpoint
 #  mysql_dbname = aws_rds_cluster.database.database_name
