@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1c86f20b1138ffa92267392d5a5276658be25753ad33d75cea2785c61905cbcb"
+            "sha256": "6007e15218196bec0c7b0443042a52f78c2b1be88e5fb25283523fdf2eabde3d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -52,19 +52,19 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:6cbc3aae70af5f35869d7b2f114cc953edf925231febf892d609682b2ba3f9f0",
-                "sha256:9d2175ad0f5de587473f20b062b1ef462d1e5ee547bb22bdd36e28442823e0a9"
+                "sha256:013ba57295f05da141e364191dd46f4086e8fe3eb83a3cd09730eeb684ffbab3",
+                "sha256:1e845aa92b3ad70b954329b98835135c28b3000e322ff8d3fc46a956bdb6e94b"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==1.21.34"
+            "version": "==1.21.37"
         },
         "botocore": {
             "hashes": [
-                "sha256:4402900838fad0c46c78f16a497709039f10e945c6ef1f0df5d9a98c80f1563b",
-                "sha256:ec849864a6791c04ac6c52539dae34d53856cd32eb7e5481a3465aab7bd93555"
+                "sha256:21e164a213beca36033c46026bffa62f2ee2cd2600777271f9a551fb34dba006",
+                "sha256:70c48c4ae3c2b9ec0ca025385979d01f4c7dae4d9a61c82758d4cf7caa7082cd"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==1.24.34"
+            "version": "==1.24.37"
         },
         "certifi": {
             "hashes": [
@@ -80,6 +80,22 @@
             ],
             "markers": "python_version >= '3'",
             "version": "==2.0.12"
+        },
+        "clear-skies": {
+            "hashes": [
+                "sha256:643ae05a46d2f3cb53e8c999eef660807b92dd9784972db8287e27f535d81916",
+                "sha256:c11aacf3467827df7afbd14f0eef8803a728a4459abc98b0f9753b49d3d07e2d"
+            ],
+            "index": "pypi",
+            "version": "==1.0.0"
+        },
+        "clear-skies-aws": {
+            "hashes": [
+                "sha256:64338f1bfc958762ffbed6986a75531fad44cf898f0e0e10a2b5d0d24a22df48",
+                "sha256:f47e7faa1957fe6c0e593ff1b8491736fa5d185f1883562079aefbbd2a4235b0"
+            ],
+            "index": "pypi",
+            "version": "==1.0.0"
         },
         "dateparser": {
             "hashes": [
@@ -104,6 +120,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==1.0.0"
+        },
+        "mygrations": {
+            "hashes": [
+                "sha256:1d3cd01c42133c8e5140004459bbec475bb6852b9f40d7515bbbdec89bedc48c",
+                "sha256:cfca7d525dbefc225a6ccaa912d0e6087faab37e2d478b43a0e96b268ac4b4d8"
+            ],
+            "index": "pypi",
+            "version": "==1.0.2"
         },
         "pymysql": {
             "hashes": [

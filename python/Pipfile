@@ -9,6 +9,9 @@ requests = "*"
 akeyless = {git = "https://github.com/akeylesslabs/akeyless-python.git"}
 akeyless-cloud-id = "*"
 dateparser = "*"
+clear-skies = "*"
+clear-skies-aws = "*"
+mygrations = "*"
 
 [dev-packages]
 
