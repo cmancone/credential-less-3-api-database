@@ -1,4 +1,4 @@
 on: push
 jobs:
   test_and_deploy:
-    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@768da33b0bc15f563dd27742c3587837baa07e5b
+    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@db76af8032a2b54cec0dfb713ec20a8386e1926c
