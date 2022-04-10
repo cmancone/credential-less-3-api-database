@@ -57,8 +57,9 @@ if __name__ == '__main__':
     # configuration file, and then we just tell AKeyless which environment we're running against.
     migrate = clearskies.contexts.cli(
         migration_app,
+        di_class=clearskies_aws.di.StandardDependencies,
         additional_configs=[
-            clearskies.secrets.additional_configs.mysql_connection_dynamic_producer_via_ssh_cert_bastion(),
+            clearskies_aws.secrets.additional_configs.mysql_connection_dynamic_producer_via_ssh_cert_bastion(),
             clearskies.secrets.akeyless_access_key_auth(),
         ]
     )
