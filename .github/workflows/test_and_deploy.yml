@@ -4,7 +4,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@d77c918ecf04329af4d06243dd51720aca0a5f76
+    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@766a0d50168dc6974d0239a96559ee043f780e00
     with:
       aws-producer-path: /credentials
       access-id: p-jiu4ebrbyalq
