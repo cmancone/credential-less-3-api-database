@@ -1,4 +1,7 @@
 on: push
 jobs:
   clear-key:
-    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@5d7c63779002c6ae948375ac17377e46416104fa
+    permissions:
+      id-token: write
+      contents: read
+    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@c1212160f9b5e226d080fe422adc8c8a3adb0597
