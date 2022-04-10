@@ -1,6 +1,6 @@
 CREATE TABLE `categories` (
   `id` CHAR(36) NOT NULL DEFAULT '',
-  `parent_id` CHAR(32) DEFAULT NULL,
+  `parent_id` CHAR(36) DEFAULT NULL,
   `name` VARCHAR(255) NOT NULL DEFAULT '',
   `description` TEXT,
   `created_at` DATETIME NOT NULL,
