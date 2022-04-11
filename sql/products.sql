@@ -2,6 +2,7 @@ CREATE TABLE `products` (
   `id` CHAR(36) NOT NULL DEFAULT '',
   `manufacturer_id` CHAR(36) DEFAULT NULL,
   `name` VARCHAR(255) NOT NULL DEFAULT '',
+  `short_description` VARCHAR(255) NOT NULL DEFAULT '',
   `description` TEXT,
   `manufacturer_part_number` VARCHAR(255) NOT NULL DEFAULT '',
   `cost` DECIMAL(20,6) UNSIGNED NOT NULL DEFAULT 0.00,

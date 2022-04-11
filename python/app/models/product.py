@@ -13,6 +13,7 @@ class Product(Model):
         return OrderedDict([
             column_types.belongs_to('manufacturer_id', parent_models_class=manufacturer.Manufacturer),
             column_types.string('name', input_requirements=[required(), maximum_length(255)]),
+            column_types.string('short_description', input_requirements=[maximum_length(255)]),
             column_types.string('description', input_requirements=[required(), maximum_length(1024)]),
             column_types.string('manufacturer_part_number', input_requirements=[required(), maximum_length(255)]),
             column_types.float('cost'),
