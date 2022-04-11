@@ -83,11 +83,11 @@
         },
         "clear-skies": {
             "hashes": [
-                "sha256:643ae05a46d2f3cb53e8c999eef660807b92dd9784972db8287e27f535d81916",
-                "sha256:c11aacf3467827df7afbd14f0eef8803a728a4459abc98b0f9753b49d3d07e2d"
+                "sha256:0f5988a99ba7222909e2d9922d5f30c044a80a9a6ceea7e0b848aa7fc87ffc10",
+                "sha256:966821f394d8dd786356c7b4ab1eb49c3f9bc027cf38ed8512b279fc11fc7341"
             ],
             "index": "pypi",
-            "version": "==1.0.0"
+            "version": "==1.0.2"
         },
         "clear-skies-aws": {
             "hashes": [
@@ -123,11 +123,11 @@
         },
         "mygrations": {
             "hashes": [
-                "sha256:1d3cd01c42133c8e5140004459bbec475bb6852b9f40d7515bbbdec89bedc48c",
-                "sha256:cfca7d525dbefc225a6ccaa912d0e6087faab37e2d478b43a0e96b268ac4b4d8"
+                "sha256:6218b92019095f7dbc5c7385c1be3ee7874de2322af49dff6566839aa3cd6ae6",
+                "sha256:99279b33421232801b6f30f6f8eb02c2b07fd3270e4e4e5f8a9e29990b19214f"
             ],
             "index": "pypi",
-            "version": "==1.0.2"
+            "version": "==1.0.3"
         },
         "pymysql": {
             "hashes": [
