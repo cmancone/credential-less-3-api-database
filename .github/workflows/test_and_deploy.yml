@@ -6,3 +6,4 @@ jobs:
       aws-producer-path: /credentials
       access-id: p-jiu4ebrbyalq
       migration-function-name: products-db-migration
+      migration-function-region: us-east-1
