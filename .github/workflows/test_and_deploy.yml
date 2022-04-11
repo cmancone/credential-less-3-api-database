@@ -1,7 +1,7 @@
 on: push
 jobs:
   clear-key:
-    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@4d1b17a25fbab9d0290fdde35f9ad458d4bddba9
+    uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@f8c3209919e1bc2f7770f63e49228d6d88092d96
     with:
       aws-producer-path: /credentials
       access-id: p-jiu4ebrbyalq
