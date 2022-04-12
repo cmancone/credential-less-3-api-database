@@ -67,6 +67,6 @@ resource "aws_iam_instance_profile" "bastion" {
 
 data "aws_partition" "current" {}
 resource "aws_iam_role_policy_attachment" "SSM-role-policy-attach" {
-  role       = aws_iam_role.ssm_role.name
+  role       = aws_iam_role.bastion.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
