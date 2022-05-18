@@ -1,3 +1,3 @@
-# The Credential-less App, Step 3 - Databases
+# Building a Credential-less application: The Application!
 
-Managing databases and migrations without credentials
+Our actual application for the credential-less app

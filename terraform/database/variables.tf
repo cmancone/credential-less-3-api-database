@@ -63,9 +63,9 @@ variable "engine_version" {
 ############
 # AKeyless #
 ############
-variable "akeyless_access_id" {
+variable "akeyless_terraform_access_id" {
   type        = string
-  description = "The access id for the lambdas to use when logging into AWS"
+  description = "The access id for Terraform to use when logging into AKeyless"
 }
 
 variable "akeyless_api_host" {
@@ -76,6 +76,11 @@ variable "akeyless_api_host" {
 variable "akeyless_folder" {
   type        = string
   description = "The desired path to the folder where all database targets/producers will be kept"
+}
+
+variable "akeyless_gateway_domain_name" {
+  type        = string
+  description = "The domain where your gateway lives, and where dynamic producers will be created"
 }
 
 ####################
@@ -102,11 +107,6 @@ variable "migration_runtime" {
 ########
 # Misc #
 ########
-variable "akeyless_ca_public_key" {
-  type        = string
-  description = "The public key of the AKeyless CA that will be used for cert-based authentication to SSH into the bastion"
-}
-
 variable "tags" {
   type        = map(string)
   description = "Tags to attach to all resources"

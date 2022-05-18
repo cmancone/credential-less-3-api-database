@@ -65,9 +65,9 @@ variable "database_incoming_security_group_ids" {
 #############
 # AKeyless ##
 #############
-variable "akeyless_access_id" {
+variable "akeyless_terraform_access_id" {
   type        = string
-  description = "The access id for the lambdas to use when logging into AWS"
+  description = "The access id for Terraform to use when logging into AKeyless"
 }
 
 variable "akeyless_folder" {
@@ -75,15 +75,15 @@ variable "akeyless_folder" {
   description = "The desired path to the folder where all database targets/producers will be kept"
 }
 
-variable "akeyless_ca_public_key" {
-  type        = string
-  description = "The public key of the AKeyless CA that will be used for cert-based authentication to SSH into the bastion"
-}
-
 variable "akeyless_api_host" {
   type        = string
   description = "The URL to the gateway where the service will login and fetch credentials from"
   default     = "https://api.akeyless.io"
+}
+
+variable "akeyless_gateway_domain_name" {
+  type        = string
+  description = "The domain where your gateway lives, and where dynamic producers will be created"
 }
 
 ###############

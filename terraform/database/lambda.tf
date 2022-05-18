@@ -15,8 +15,8 @@ resource "aws_lambda_function" "migration" {
 
   environment {
     variables = {
-      akeyless_access_id              = var.akeyless_access_id
-      akeyless_mysql_dynamic_producer = "${var.akeyless_folder}/migration"
+      akeyless_access_id              = akeyless_auth_method_aws_iam.migration.access_id
+      akeyless_mysql_dynamic_producer = akeyless_producer_mysql.migration.name
       akeyless_api_host               = "https://api.akeyless.io"
       db_database                     = aws_rds_cluster.database.database_name
       db_host                         = aws_rds_cluster.database.endpoint

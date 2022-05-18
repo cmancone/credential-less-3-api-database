@@ -15,7 +15,7 @@ resource "aws_lambda_function" "application" {
 
   environment {
     variables = {
-      akeyless_access_id              = var.akeyless_access_id
+      akeyless_access_id              = akeyless_auth_method_aws_iam.application.access_id
       akeyless_mysql_dynamic_producer = var.akeyless_database_producer_path
       akeyless_api_host               = var.akeyless_api_host
       db_database                     = var.database_name

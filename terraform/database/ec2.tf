@@ -23,7 +23,7 @@ data "template_file" "bastion_init" {
   template = file("${path.module}/bastion_init.sh")
 
   vars = {
-    akeyless_ca_public_key = var.akeyless_ca_public_key
+    akeyless_ca_public_key = data.akeyless_rsa_pub.bastion.ssh
   }
 }
 

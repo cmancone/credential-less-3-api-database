@@ -39,9 +39,14 @@ variable "database_security_group_id" {
 ############
 # AKeyless #
 ############
-variable "akeyless_access_id" {
+variable "akeyless_terraform_access_id" {
   type        = string
-  description = "The access id for the lambdas to use when logging into AWS"
+  description = "The access id for Terraform to use when logging into AKeyless"
+}
+
+variable "akeyless_database_producer_path" {
+  type        = string
+  description = "The path to the MySQL database producer that the application will use to fetch credentials"
 }
 
 variable "akeyless_api_host" {
@@ -49,9 +54,9 @@ variable "akeyless_api_host" {
   description = "The URL to the gateway where the service will login and fetch credentials from"
 }
 
-variable "akeyless_database_producer_path" {
+variable "akeyless_folder" {
   type        = string
-  description = "The path to the MySQL database producer that the application will use to fetch credentials"
+  description = "The desired path to the folder where all database targets/producers will be kept"
 }
 
 ######################

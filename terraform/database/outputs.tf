@@ -22,3 +22,13 @@ output "bastion_public_ip" {
   value       = aws_instance.bastion.public_ip
   description = "The ip address of the bastion"
 }
+
+output "database_producer_path_application" {
+  value       = akeyless_producer_mysql.application.name
+  description = "The path to the database producer to be used by the application"
+}
+
+output "database_producer_path_migration" {
+  value       = akeyless_producer_mysql.migration.name
+  description = "The path to the database producer to be used by the migration"
+}
