@@ -1,6 +1,9 @@
 on: push
 jobs:
   clear-key:
+    permissions:
+      id-token: write
+      contents: read
     uses: cmancone/clear-key-deployments/.github/workflows/test_and_deploy.yml@main
     with:
       aws-producer-path: /path/to/aws/producer
