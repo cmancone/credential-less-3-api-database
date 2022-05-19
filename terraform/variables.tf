@@ -86,6 +86,11 @@ variable "akeyless_gateway_domain_name" {
   description = "The domain where your gateway lives, and where dynamic producers will be created"
 }
 
+variable "akeyless_gateway_security_group_id" {
+  type        = string
+  description = "The security group id for your gateway (so it can be granted database access)"
+}
+
 ###############
 # Application #
 ###############

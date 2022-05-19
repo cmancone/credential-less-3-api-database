@@ -7,6 +7,17 @@ resource "aws_security_group_rule" "allow_incoming_bastion" {
   source_security_group_id = aws_security_group.bastion.id
 }
 
+resource "aws_security_group_rule" "allow_additional_db_access" {
+  for_each                 = { for index, security_group_id in var.incoming_security_group_ids : index => security_group_id }
+
+  security_group_id        = var.database_security_group_id
+  type                     = "ingress"
+  from_port                = "3306"
+  to_port                  = "3306"
+  protocol                 = "tcp"
+  source_security_group_id = each.value
+}
+
 resource "aws_security_group_rule" "allow_incoming_lambda" {
   security_group_id        = var.database_security_group_id
   type                     = "ingress"

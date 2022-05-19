@@ -28,7 +28,7 @@ module "database" {
   zip_filename                 = var.zip_filename
   bastion_subnet_id            = var.database_bastion_subnet_id
   engine_version               = var.database_engine_version
-  incoming_security_group_ids  = var.database_incoming_security_group_ids
+  incoming_security_group_ids  = concat(var.database_incoming_security_group_ids, [var.akeyless_gateway_security_group_id])
   akeyless_api_host            = var.akeyless_api_host
   akeyless_folder              = var.akeyless_folder
   akeyless_gateway_domain_name = var.akeyless_gateway_domain_name

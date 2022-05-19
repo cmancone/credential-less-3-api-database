@@ -56,8 +56,20 @@ variable "database_security_group_id" {
 ############
 variable "engine_version" {
   type        = string
-  default     = "5.7.mysql_aurora.2.07.3"
+  default     = "5.7.mysql_aurora.2.07.2"
   description = "The Aurora engine to use"
+}
+
+variable "instance_class" {
+  type        = string
+  default     = "db.t3.small"
+  description = "The instance class to use for the database instances"
+}
+
+variable "instance_count" {
+  type        = number
+  default     = 1
+  description = "The number of RDS instances to use"
 }
 
 ############

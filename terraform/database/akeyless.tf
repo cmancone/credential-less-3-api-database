@@ -41,7 +41,7 @@ resource "akeyless_target_db" "root" {
     ignore_changes = [pwd]
   }
 
-  depends_on = [aws_rds_cluster.database]
+  depends_on = [aws_rds_cluster_instance.database]
 }
 
 # Create a rotator for the database master password target.  Note that, as part of its creation,
@@ -61,6 +61,8 @@ resource "akeyless_rotated_secret" "db_master_rotator" {
   lifecycle {
     ignore_changes = all
   }
+
+  depends_on = [akeyless_target_db.root]
 }
 
 # create a database producer that will be consumed by our application (therefore, simple CRUD permissions)
@@ -72,6 +74,8 @@ resource "akeyless_producer_mysql" "application" {
   mysql_screation_statements = "CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}' PASSWORD EXPIRE INTERVAL 1 DAY;GRANT DELETE,INSERT,SELECT,UPDATE ON ${aws_rds_cluster.database.database_name}.* TO '{{name}}'@'%';"
   mysql_port = "3306"
   target_name = trimprefix(akeyless_target_db.root.name, "/")
+
+  depends_on = [akeyless_rotated_secret.db_master_rotator]
 }
 
 # create a database producer that will be consumed by our migration (therefore, full database access)
@@ -83,6 +87,8 @@ resource "akeyless_producer_mysql" "migration" {
   mysql_screation_statements = "CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}' PASSWORD EXPIRE INTERVAL 1 DAY;GRANT all ON ${aws_rds_cluster.database.database_name}.* TO '{{name}}'@'%';"
   mysql_port = "3306"
   target_name = trimprefix(akeyless_target_db.root.name, "/")
+
+  depends_on = [akeyless_rotated_secret.db_master_rotator]
 }
 
 # We need a key that will be used by our SSH certificate issuer
@@ -99,7 +105,7 @@ resource "akeyless_ssh_cert_issuer" "bastion" {
 
   allowed_users = "ubuntu,ec2-user"
   name = "${var.akeyless_folder}/ssh-cert-issuer"
-  signer_key_name = trimprefix(akeyless_dfc_key.bastion.name, "/")
+  signer_key_name = format("/%s", trimprefix(akeyless_dfc_key.bastion.name, "/"))
   ttl = 3600
 }
 

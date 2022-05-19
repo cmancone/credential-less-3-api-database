@@ -10,3 +10,4 @@ jobs:
       access-id: p-123456789012
       migration-function-name: products-db-migration
       migration-function-region: us-east-1
+      run-database-migrations: false

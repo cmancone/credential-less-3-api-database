@@ -1,7 +1,7 @@
 resource "aws_rds_cluster" "database" {
   cluster_identifier      = var.name
   engine                  = "aurora-mysql"
-  engine_mode             = "serverless"
+  engine_mode             = "provisioned"
   engine_version          = var.engine_version
   storage_encrypted       = true
   database_name           = local.database_name
@@ -19,7 +19,20 @@ resource "aws_rds_cluster" "database" {
   lifecycle {
     # AKeyless will rotate our master password for us and we don't want terraform to reset it,
     # so we need to ignore changes to the master password
-    ignore_changes = [master_password]
+    ignore_changes = [master_password, engine_version]
+  }
+}
+
+resource "aws_rds_cluster_instance" "database" {
+  instance_class     = var.instance_class
+  count              = var.instance_count
+  identifier_prefix  = var.name
+  cluster_identifier = aws_rds_cluster.database.id
+  engine             = aws_rds_cluster.database.engine
+  engine_version     = "5.7.mysql_aurora.2.07.2"
+
+  lifecycle {
+    ignore_changes = [engine_version]
   }
 }
 
